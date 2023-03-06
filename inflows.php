@@ -23,7 +23,7 @@ while ($storesRow = $storesResult->fetch(PDO::FETCH_ASSOC)) {
 <div class="sButtons"><a href="newInflow.php" class="sButton">REGISTRAR ENTRADA</a></div>
 
 <div class="searchDiv">
-Mostrar entradas del almac&eacute;n <select id="selectW" class="" name="">
+Mostrar entradas del almacén <select id="selectW" class="" name="">
     <?php
 	echo "<option value='0'>Todos</option>";
 	foreach ($storeIDs as $i => $storeID) {
@@ -41,10 +41,10 @@ Busqueda por
 <table id="inflowList" class="display" cellspacing="0" cellpadding="0" width="100%">
     <thead>
         <tr>
-            <th>Almac�n</th>
+            <th>Almacén</th>
             <th>Folio</th>
             <th>Fecha</th>
-            <th>Realiz&oacute;</th>
+            <th>Realizó</th>
             <th width="25px">Ver</th>
         </tr>
     </thead>

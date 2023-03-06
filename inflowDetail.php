@@ -29,7 +29,7 @@ $prevID = $rowPrev["prevID"];
 <table width="100%" border="0" cellspacing="20px" cellpadding="0">
   <tbody>
     <tr>
-      <td width="50%">Almac�n<br>
+      <td width="50%">Almacén<br>
       	<div style="margin-top:10px"><input type="text" value="<?php echo $row['store']; ?>" disabled class='inputText'></div>
       </td>
       <td width="50%">Empleado<br>
@@ -37,7 +37,7 @@ $prevID = $rowPrev["prevID"];
         </td>
     </tr>
     <tr>
-    	<td>Fecha de creaci�n<br><div style="margin-top:10px"><input type="text" value="<?php echo $row['created']; ?>" disabled class='inputText'></div></td>
+    	<td>Fecha de creación<br><div style="margin-top:10px"><input type="text" value="<?php echo $row['created']; ?>" disabled class='inputText'></div></td>
         <td></td>
     </tr>
     <tr>
@@ -47,7 +47,7 @@ $prevID = $rowPrev["prevID"];
 				<table class='itemTable' width='100%' cellpadding='0' cellspacing='10px'>
 					<tr>
                     	<td width="76px">Cantidad</td>
-                    	<td width="250px">C�digo</td>
+                    	<td width="250px">Código</td>
 						<td>Producto</td>
 					</tr>
 				</table>

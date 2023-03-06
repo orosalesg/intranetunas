@@ -25,7 +25,7 @@ $toDateQ = date('Y-m-d 23:59:59', strtotime(str_replace('/', '-', $_POST["toDate
 <div class="format">
 <table width="100%" border="0" cellspacing="20px" cellpadding="0">
 <tr>
-	<td width="50%">Sal�n</td>
+	<td width="50%">Salón</td>
     <td>Fecha de documento</td>
 </tr>
 <tr>
@@ -59,7 +59,7 @@ $toDateQ = date('Y-m-d 23:59:59', strtotime(str_replace('/', '-', $_POST["toDate
                     <tr>
                         <td class="tdFolio">Folio</td>
                         <td class="tdDate">Fecha</td>
-                        <td class="tdEmp">Realiz�</td>
+                        <td class="tdEmp">Realizó</td>
                         <td class="tdValue">Monto</td>
                         <td class="tdView"></td>
                     </tr>
@@ -105,7 +105,7 @@ $toDateQ = date('Y-m-d 23:59:59', strtotime(str_replace('/', '-', $_POST["toDate
                     <tr>
                         <td class="tdFolio">Folio</td>
                         <td class="tdDate">Fecha</td>
-                        <td class="tdEmp">Realiz�</td>
+                        <td class="tdEmp">Realizó</td>
                         <td class="tdValue">Monto</td>
                         <td class="tdView"></td>
                     </tr>

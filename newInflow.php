@@ -10,7 +10,7 @@
 <table width="100%" border="0" cellspacing="20px" cellpadding="0">
   <tbody>
     <tr>
-      <td width="50%">Almac�n<br>
+      <td width="50%">Almacén<br>
       	<div style="margin-top:10px">
         	<select id="store" name="store" style="margin-top:10px;" required>
             <option value="" selected disabled>Selecciona...</option>
@@ -32,7 +32,7 @@
             	<thead>
                 	<tr>
                     	<td width="76px">Cantidad</td>
-                    	<td width="250px">C�digo</td>
+                    	<td width="250px">Código</td>
                         <td>Producto</td>
                         <td width="30px"></td>
                     </tr>

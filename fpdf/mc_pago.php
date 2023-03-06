@@ -205,6 +205,8 @@ var $aligns;
 
 function Header()
 {
+	require('includes/mysqlconn.php');
+
 	$pmnID = $_REQUEST["pmnID"];
 
 	$queryPmnt = "SELECT T1.ID, T1.code, T1.created_at, T1.storeID, T3.name storeName, CONCAT(T2.first, ' ', T2.last) emp, T1.active, T1.fromDate, T1.toDate FROM PAYMENT T1 JOIN CREW T2 ON T1.empID = T2.ID JOIN STORES T3 ON T1.storeID = T3.ID WHERE T1.ID = $pmnID";

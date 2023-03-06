@@ -6,21 +6,21 @@ $storeID = $_REQUEST["storeID"];
 $prodID = $_REQUEST["prodID"];
 
 $queryInv = "SELECT T1.qty, T2.code, T2.name, T3.name store FROM PRDL T1 JOIN PRODUCT T2 ON T1.prodCode = T2.code JOIN STORES T3 ON T1.storeID = T3.ID WHERE T1.prodCode = '$prodCode' AND T1.storeID = $storeID";
-$resultInv = mysql_query($queryInv);
-$rowInv = mysql_fetch_assoc($resultInv);
+$resultInv = $dbhandle->query($queryInv);
+$rowInv = $resultInv->fetch(PDO::FETCH_ASSOC);
 $quantInv = $rowInv["qty"];
 $store = $rowInv["store"];
 $product = $rowInv["name"];
 
 $queryNext = "SELECT ID, code FROM PRODUCT WHERE ID = (SELECT MIN(ID) FROM PRODUCT WHERE ID > '$prodID')";
-$resultNext = mysql_query($queryNext);
-$rowNext = mysql_fetch_assoc($resultNext);
+$resultNext = $dbhandle->query($queryNext);
+$rowNext = $resultNext->fetch(PDO::FETCH_ASSOC);
 $nextID = $rowNext["ID"];
 $nextCode = $rowNext["code"];
 
 $queryPrev = "SELECT ID, code FROM PRODUCT WHERE ID = (SELECT MAX(ID) FROM PRODUCT WHERE ID < '$prodID')";
-$resultPrev = mysql_query($queryPrev);
-$rowPrev = mysql_fetch_assoc($resultPrev);
+$resultPrev = $dbhandle->query($queryPrev);
+$rowPrev = $resultPrev->fetch(PDO::FETCH_ASSOC);
 $prevID = $rowPrev["ID"];
 $prevCode = $rowPrev["code"];
 
@@ -38,10 +38,10 @@ $prevCode = $rowPrev["code"];
 <table width="100%" border="0" cellspacing="20px" cellpadding="0">
 	<tr>
     	<td></td>
-    	<td>Código</td>
-        <td>Artículo</td>
+    	<td>CÃ³digo</td>
+        <td>ArtÃ­culo</td>
         <td></td>
-        <td width="350px">Almacén</td>
+        <td width="350px">AlmacÃ©n</td>
     </tr>
     <tr>
     	<td style="font-size:18px"><a href="kardex.php?prodCode=<?php echo $prevCode; ?>&storeID=<?php echo $storeID; ?>&prodID=<?php echo $prevID; ?>"><i class="fa fa-arrow-left prev" aria-hidden="true"></i></a></td>
@@ -51,8 +51,8 @@ $prevCode = $rowPrev["code"];
         <td width="350px"><select id="store" name="store" style="margin-top:10px;" required>
             <option value="" selected disabled>Selecciona...</option>
         	<?php
-			$myQuery = mysql_query("SELECT ID, CONCAT(name, ' (', ID, ')') name FROM STORES");
-			while($row = mysql_fetch_array($myQuery)){
+			$myQuery = $dbhandle->query("SELECT ID, CONCAT(name, ' (', ID, ')') name FROM STORES");
+			while($row = $myQuery->fetch(PDO::FETCH_ASSOC)){
 				echo "<option value='".$row["ID"]."'>".$row["name"]."</option>";
 			};
 			?>
@@ -95,8 +95,8 @@ SELECT T5.created_at, 'SALIDA' type, T5.code, T5.ID, CONCAT(T6.first, ' ', T6.la
 SELECT T8.created_at, 'TRANSFERENCIA' type, T8.code, T8.ID, CONCAT(T9.first, ' ', T9.last) name, 0 qtyIn, T7.qty qtyOut  FROM TRLN T7 JOIN TRANSFERS T8 ON T7.tranID = T8.ID JOIN CREW T9 ON T8.empID = T9.ID WHERE T7.prodCode = '".$prodCode."' AND T8.orStore = ".$storeID." UNION ALL
 SELECT T11.created_at, 'TRANSFERENCIA' type, T11.code, T11.ID, CONCAT(T12.first, ' ', T12.last) name, T10.qty qtyIn, 0 qtyOut  FROM TRLN T10 JOIN TRANSFERS T11 ON T10.tranID = T11.ID JOIN CREW T12 ON T11.empID = T12.ID WHERE T10.prodCode = '".$prodCode."' AND T11.dsStore = ".$storeID." UNION ALL
 SELECT T14.created_at, 'VENTA' type, T14.code, T14.ID, CONCAT(T15.first, ' ', T15.last) name, 0 qtyIn, T13.qty qtyOut  FROM SALLN T13 JOIN SALES T14 ON T13.salID = T14.ID JOIN CREW T15 ON T14.empID = T15.ID WHERE T13.prodCode = '".$prodCode."' AND T14.storeID = ".$storeID.") TT1 ORDER BY TT1.created_at ASC";
-		$myresult = mysql_query($myQuery);
-		while($row = mysql_fetch_assoc($myresult)){
+		$myresult = $dbhandle->query($myQuery);
+		while($row = $myresult->fetch(PDO::FETCH_ASSOC)){
 			$quant = $quant + $row["qtyIn"] - $row["qtyOut"];	
 			$link = "";
 			switch ($row["type"]) {
@@ -133,15 +133,15 @@ SELECT T14.created_at, 'VENTA' type, T14.code, T14.ID, CONCAT(T15.first, ' ', T1
 <div class="format" style="margin-top:20px">
 <table width="100%" border="0" cellspacing="20px" cellpadding="0">
 	<tr>
-    	<td>Existencia según Kardex</td>
-        <td>Existencia según Inventario</td>
+    	<td>Existencia segÃºn Kardex</td>
+        <td>Existencia segÃºn Inventario</td>
         <td>Diferencia</td>
     </tr>
     <tr>
     	<td style="font-size:30px"><?php echo $quant; ?></td>
         <?php
 		$upQuery = "UPDATE PRDL SET qty = $quant WHERE prodCode = '$prodCode' AND storeID = $storeID";
-		$upresult = mysql_query($upQuery);
+		$upresult = $dbhandle->query($upQuery);
         ?>
         <td style="font-size:30px"><?php echo $quantInv; ?></td>
         <td style="font-size:30px"><?php echo $quantInv - $quant; ?></td>

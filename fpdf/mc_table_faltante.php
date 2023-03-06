@@ -202,6 +202,8 @@ var $aligns;
 
 function Header()
 {	
+	require('includes/mysqlconn.php');
+
     // Logo
     $this->Image("images/logo.png",10,5,70);
     // Arial bold 20
@@ -215,8 +217,8 @@ function Header()
 		$title = "Faltante por Proveedor";
 	} else {
 		$queryStore = "SELECT name FROM STORES WHERE ID = '".$_SESSION["store"]."'";
-		$resultStore = mysql_query($queryStore);
-		$rowStore = mysql_fetch_assoc($resultStore);
+		$resultStore = $dbhandle->query($queryStore);
+		$rowStore = $resultStore->fetch(PDO::FETCH_ASSOC);
 		$title = "Inventario ".$rowStore["name"];
 	}
 	$this->Cell(129.5,10,$title,0,1,'R'); 
@@ -253,8 +255,8 @@ function Header()
 		$storesQuery.= "AND ID = '".$_SESSION["store"]."' ";
 	}
 	$storesQuery.= "ORDER BY ID ASC";
-	$storesResult = mysql_query($storesQuery);
-	while ($storesRow = mysql_fetch_assoc($storesResult)) {
+	$storesResult = $dbhandle->query($storesQuery);
+	while ($storesRow = $storesResult->fetch(PDO::FETCH_ASSOC)) {
 		$storeIDs[] = $storesRow["ID"];
 		$storeNames[] = $storesRow["code"];
 	}

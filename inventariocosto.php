@@ -27,8 +27,8 @@ if ($_SESSION["role"] == 'Y') {
 	$query.= ", T1.price, (SELECT SUM(qty) FROM PRDL T4 WHERE T4.prodCode = T1.code) total";
 }
 $query.= " FROM PRODUCT T1  ORDER BY T1.name ASC";
-$result = mysql_query($query);
-$registros = mysql_num_rows ($result);
+$result = $dbhandle->query($query);
+$registros = count($result->fetch(PDO::FETCH_ASSOC));
 
 if ($registros > 0) {
    require_once 'PHPExcel/Classes/PHPExcel.php';
@@ -45,7 +45,7 @@ if ($registros > 0) {
         ->setCategory("Confidencial");    
 
    $e = 2;   
-  while($row = mysql_fetch_object($result)){
+  while($row = $result->fetch(PDO::FETCH_OBJ)){
    
        
       $objPHPExcel->setActiveSheetIndex(0)
@@ -96,10 +96,10 @@ if ($registros > 0) {
 	$byStqry.= ", T1.price, (SELECT qty FROM PRDL T4 WHERE T4.prodCode = T1.code and T4.storeID='100') cant ";
 	}
 	$byStqry.= " FROM PRODUCT T1 ORDER BY T1.name ASC";
-	$res100 = mysql_query($byStqry);
+	$res100 = $dbhandle->query($byStqry);
 	
 	$i = 2;   
-  while($suc100 = mysql_fetch_object($res100)){
+  while($suc100 = $res100->fetch(PDO::FETCH_OBJ)){
           
     $objPHPExcel->setActiveSheetIndex(0)
             ->setCellValue('E'.$i, $suc100->cant);
@@ -114,10 +114,10 @@ if ($registros > 0) {
 	$byStqry.= ", T1.price, (SELECT qty FROM PRDL T4 WHERE T4.prodCode = T1.code and T4.storeID='101') cant ";
 	}
 	$byStqry.= " FROM PRODUCT T1 ORDER BY T1.name ASC";
-	$res101 = mysql_query($byStqry);
+	$res101 = $dbhandle->query($byStqry);
 	
 	$i = 2;   
-  while($suc101 = mysql_fetch_object($res101)){
+  while($suc101 = $res101->fetch(PDO::FETCH_OBJ)){
           
     $objPHPExcel->setActiveSheetIndex(0)
             ->setCellValue('F'.$i, $suc101->cant);
@@ -132,10 +132,10 @@ if ($registros > 0) {
 	$byStqry.= ", T1.price, (SELECT qty FROM PRDL T4 WHERE T4.prodCode = T1.code and T4.storeID='102') cant ";
 	}
 	$byStqry.= " FROM PRODUCT T1 ORDER BY T1.name ASC";
-	$res102 = mysql_query($byStqry);
+	$res102 = $dbhandle->query($byStqry);
 	
 	$i = 2;   
-  while($suc102 = mysql_fetch_object($res102)){
+  while($suc102 = $res102->fetch(PDO::FETCH_OBJ)){
           
     $objPHPExcel->setActiveSheetIndex(0)
             ->setCellValue('G'.$i, $suc102->cant);
@@ -149,10 +149,10 @@ if ($registros > 0) {
 	$byStqry.= ", T1.price, (SELECT qty FROM PRDL T4 WHERE T4.prodCode = T1.code and T4.storeID='103') cant ";
 	}
 	$byStqry.= " FROM PRODUCT T1 ORDER BY T1.name ASC";
-	$res103 = mysql_query($byStqry);
+	$res103 = $dbhandle->query($byStqry);
 	
 	$i = 2;   
-  while($suc103 = mysql_fetch_object($res103)){
+  while($suc103 = $res103->fetch(PDO::FETCH_OBJ)){
           
     $objPHPExcel->setActiveSheetIndex(0)
             ->setCellValue('H'.$i, $suc103->cant);
@@ -166,10 +166,10 @@ if ($registros > 0) {
 	$byStqry.= ", T1.price, (SELECT qty FROM PRDL T4 WHERE T4.prodCode = T1.code and T4.storeID='104') cant ";
 	}
 	$byStqry.= " FROM PRODUCT T1 ORDER BY T1.name ASC";
-	$res104 = mysql_query($byStqry);
+	$res104 = $dbhandle->query($byStqry);
 	
 	$i = 2;   
-  while($suc104 = mysql_fetch_object($res104)){
+  while($suc104 = $res104->fetch(PDO::FETCH_OBJ)){
           
     $objPHPExcel->setActiveSheetIndex(0)
             ->setCellValue('I'.$i, $suc104->cant);
@@ -184,10 +184,10 @@ if ($registros > 0) {
 	$byStqry.= ", T1.price, (SELECT qty FROM PRDL T4 WHERE T4.prodCode = T1.code and T4.storeID='105') cant ";
 	}
 	$byStqry.= " FROM PRODUCT T1 ORDER BY T1.name ASC";
-	$res105 = mysql_query($byStqry);
+	$res105 = $dbhandle->query($byStqry);
 	
 	$i = 2;   
-  while($suc105 = mysql_fetch_object($res105)){
+  while($suc105 = $res105->fetch(PDO::FETCH_OBJ)){
           
     $objPHPExcel->setActiveSheetIndex(0)
             ->setCellValue('J'.$i, $suc105->cant);
@@ -202,10 +202,10 @@ if ($registros > 0) {
 	$byStqry.= ", T1.price, (SELECT qty FROM PRDL T4 WHERE T4.prodCode = T1.code and T4.storeID='106') cant ";
 	}
 	$byStqry.= " FROM PRODUCT T1 ORDER BY T1.name ASC";
-	$res106 = mysql_query($byStqry);
+	$res106 = $dbhandle->query($byStqry);
 	
 	$i = 2;   
-  while($suc106 = mysql_fetch_object($res106)){
+  while($suc106 = $res106->fetch(PDO::FETCH_OBJ)){
           
     $objPHPExcel->setActiveSheetIndex(0)
             ->setCellValue('K'.$i, $suc106->cant);
@@ -219,10 +219,10 @@ if ($registros > 0) {
 	$byStqry.= ", T1.price, (SELECT qty FROM PRDL T4 WHERE T4.prodCode = T1.code and T4.storeID='107') cant ";
 	}
 	$byStqry.= " FROM PRODUCT T1 ORDER BY T1.name ASC";
-	$res107 = mysql_query($byStqry);
+	$res107 = $dbhandle->query($byStqry);
 	
 	$i = 2;   
-  while($suc107 = mysql_fetch_object($res107)){
+  while($suc107 = $res107->fetch(PDO::FETCH_OBJ)){
           
     $objPHPExcel->setActiveSheetIndex(0)
             ->setCellValue('L'.$i, $suc107->cant);
@@ -237,10 +237,10 @@ if ($registros > 0) {
 	$byStqry.= ", T1.price, (SELECT qty FROM PRDL T4 WHERE T4.prodCode = T1.code and T4.storeID='108') cant ";
 	}
 	$byStqry.= " FROM PRODUCT T1 ORDER BY T1.name ASC";
-	$res108 = mysql_query($byStqry);
+	$res108 = $dbhandle->query($byStqry);
 	
 	$i = 2;   
-  while($suc108 = mysql_fetch_object($res108)){
+  while($suc108 = $res108->fetch(PDO::FETCH_OBJ)){
           
     $objPHPExcel->setActiveSheetIndex(0)
             ->setCellValue('M'.$i, $suc108->cant);
@@ -254,10 +254,10 @@ if ($registros > 0) {
 	$byStqry.= ", T1.price, (SELECT qty FROM PRDL T4 WHERE T4.prodCode = T1.code and T4.storeID='109') cant ";
 	}
 	$byStqry.= " FROM PRODUCT T1 ORDER BY T1.name ASC";
-	$res109 = mysql_query($byStqry);
+	$res109 = $dbhandle->query($byStqry);
 	
 	$i = 2;   
-  while($suc109 = mysql_fetch_object($res109)){
+  while($suc109 = $res109->fetch(PDO::FETCH_OBJ)){
           
     $objPHPExcel->setActiveSheetIndex(0)
             ->setCellValue('N'.$i, $suc109->cant);
@@ -271,10 +271,10 @@ if ($registros > 0) {
 	$byStqry.= ", T1.price, (SELECT qty FROM PRDL T4 WHERE T4.prodCode = T1.code and T4.storeID='110') cant ";
 	}
 	$byStqry.= " FROM PRODUCT T1 ORDER BY T1.name ASC";
-	$res110 = mysql_query($byStqry);
+	$res110 = $dbhandle->query($byStqry);
 	
 	$i = 2;   
-  while($suc110 = mysql_fetch_object($res110)){
+  while($suc110 = $res110->fetch(PDO::FETCH_OBJ)){
           
     $objPHPExcel->setActiveSheetIndex(0)
             ->setCellValue('O'.$i, $suc110->cant);

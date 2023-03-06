@@ -41,11 +41,11 @@ Busqueda por
 <table id="inflowList" class="display" cellspacing="0" cellpadding="0" width="100%">
     <thead>
         <tr>
-            <th>Almac�n Origen</th>
-            <th>Almac�n Destino</th>
+            <th>Almacén Origen</th>
+            <th>Almacén Destino</th>
             <th>Folio</th>
             <th>Fecha</th>
-            <th>Realiz&oacute;</th>
+            <th>Realizó</th>
             <th width="25px">Ver</th>
         </tr>
     </thead>
