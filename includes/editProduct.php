@@ -23,10 +23,10 @@ if(isset($_POST["active"])) {
 
 $sql = "UPDATE PRODUCT SET name = '$name', code = '$code', detail = '$detail', catID = $cat, vendorID = $vendor, cost = $cost, price = $price, active = '$active', remarks = '$remarks' WHERE ID = $prodID";
 
-$retval = mysql_query($sql);
+$retval = $dbhandle->query($sql);
 if(! $retval )
 {
-  die('Could not modify data: ' . mysql_error());
+  die('Could not modify data: ' . $retval->errorInfo());
 }
 
 // Edit Product Lines
@@ -35,10 +35,10 @@ foreach ($_POST['storeID'] as $key => $value) {
 	$max = $_POST['max'][$key];
 	$sql = "UPDATE PRDL SET minq = '$min', maxq = '$max' WHERE storeID = $value AND prodCode = '$code'";
 	
-	$retval = mysql_query($sql);
+	$retval = $dbhandle->query($sql);
 	if(! $retval )
 	{
-	  die('Could not enter data: ' . mysql_error());
+	  die('Could not enter data: ' . $retval->errorInfo());
 	}
 }
 
