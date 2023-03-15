@@ -210,8 +210,8 @@ function Header()
 	$pmnID = $_REQUEST["pmnID"];
 
 	$queryPmnt = "SELECT T1.ID, T1.code, T1.created_at, T1.storeID, T3.name storeName, CONCAT(T2.first, ' ', T2.last) emp, T1.active, T1.fromDate, T1.toDate FROM PAYMENT T1 JOIN CREW T2 ON T1.empID = T2.ID JOIN STORES T3 ON T1.storeID = T3.ID WHERE T1.ID = $pmnID";
-	$resultPmnt = mysql_query($queryPmnt);
-	$rowPmnt = mysql_fetch_assoc($resultPmnt);
+	$resultPmnt = $dbhandle->query($queryPmnt);
+	$rowPmnt = $resultPmnt->fetch(PDO::FETCH_ASSOC);
 	
 	$code = $rowPmnt["code"];
 	$store = $rowPmnt["storeID"];
@@ -223,8 +223,8 @@ function Header()
 	$toDateQ = date('Y-m-d 23:59:59', strtotime(str_replace('/', '-', $_POST["toDate"])));
 	
 	$queryTo = "SELECT T1.first, T1.last, T1.email, T2.phone, T2.address FROM CREW T1 JOIN STORES T2 ON T1.storeID = T2.ID WHERE T2.ID = '$store' LIMIT 1";
-	$resultTo = mysql_query($queryTo);
-	$rowTo = mysql_fetch_assoc($resultTo);
+	$resultTo = $dbhandle->query($queryTo);
+	$rowTo = $resultTo->fetch(PDO::FETCH_ASSOC);
 	$nameTo = $rowTo["first"]." ".$rowTo["last"];
 	$emailTo = $rowTo["email"];
 	$phoneTo = $rowTo["phone"];

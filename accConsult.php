@@ -8,8 +8,8 @@ $fromDateQ = date('Y-m-d 00:00:00', strtotime(str_replace('/', '-', $_GET["fromD
 $toDateQ = date('Y-m-d 23:59:59', strtotime(str_replace('/', '-', $_GET["toDate"])));
 
 $queryStore = "SELECT name FROM STORES WHERE ID = $store";
-$resultStore = mysql_query($queryStore);
-$rowStore = mysql_fetch_assoc($resultStore);
+$resultStore = $dbhandle->query($queryStore);
+$rowStore = $resultStore->fetch(PDO::FETCH_ASSOC);
 $storeName = $rowStore["name"];
 ?>
 <div class="sectionTitle">
@@ -37,7 +37,7 @@ $storeName = $rowStore["name"];
                     <tr>
                         <td class="tdFolio">Folio</td>
                         <td class="tdDate">Fecha</td>
-                        <td class="tdEmp">Realizó</td>
+                        <td class="tdEmp">Realizï¿½</td>
                         <td class="tdPago">Folio Pago</td>
                         <td class="tdValue">Monto</td>
                         <td class="tdView"></td>
@@ -48,8 +48,8 @@ $storeName = $rowStore["name"];
             <table class='itemTable' id='trnTable' width='100%' cellpadding='0' cellspacing='10px'>
             	<?php
 				$queryTransfers = "SELECT T1.ID, T1.code, CONCAT(T2.first, ' ', T2.last) emp, T1.created_at, T1.pmntCode, T1.remarks, (SELECT SUM((T3.qty * T4.price)) FROM TRLN T3 JOIN PRODUCT T4 ON T3.prodCode = T4.code WHERE T3.tranID = T1.ID) value FROM TRANSFERS T1 JOIN CREW T2 ON T1.empID = T2.ID WHERE T1.orStore = 100 AND T1.dsStore = $store AND T1.created_at >= '$fromDateQ' AND T1.created_at <= '$toDateQ' AND T1.account = 'Y' ORDER BY T1.created_at ASC";
-				$resultTransfers = mysql_query($queryTransfers);
-				while ($rowTransfers = mysql_fetch_assoc($resultTransfers)) {
+				$resultTransfers = $dbhandle->query($queryTransfers);
+				while ($rowTransfers = $resultTransfers->fetch(PDO::FETCH_ASSOC)) {
 					echo "<tr class='item'>
 					<td class='tdFolio'>".$rowTransfers["code"]."</td><input type='hidden' name='tranCode[]' value='".$rowTransfers["code"]."'>
 					<td class='tdDate'>".$rowTransfers["created_at"]."</td>
@@ -88,7 +88,7 @@ $storeName = $rowStore["name"];
                     <tr>
                         <td class="tdFolio">Folio</td>
                         <td class="tdDate">Fecha</td>
-                        <td class="tdEmp">Realizó</td>
+                        <td class="tdEmp">Realizï¿½</td>
                         <td class="tdPago">Folio Pago</td>
                         <td class="tdValue">Monto</td>
                         <td class="tdView"></td>
@@ -99,8 +99,8 @@ $storeName = $rowStore["name"];
             <table class='itemTable' id='devTable' width='100%' cellpadding='0' cellspacing='10px'>
             	<?php
 				$queryDevs = "SELECT T1.ID, T1.code, CONCAT(T2.first, ' ', T2.last) emp, T1.created_at, T1.pmntCode, T1.remarks, (SELECT SUM((T3.qty * T4.price)) FROM TRLN T3 JOIN PRODUCT T4 ON T3.prodCode = T4.code WHERE T3.tranID = T1.ID) value FROM TRANSFERS T1 JOIN CREW T2 ON T1.empID = T2.ID WHERE T1.orStore = $store AND T1.dsStore = 100 AND T1.created_at >= '$fromDateQ' AND T1.created_at <= '$toDateQ' AND T1.account = 'Y' ORDER BY T1.created_at ASC";
-				$resultDevs = mysql_query($queryDevs);
-				while ($rowDevs = mysql_fetch_assoc($resultDevs)) {
+				$resultDevs = $dbhandle->query($queryDevs);
+				while ($rowDevs = $resultDevs->fetch(PDO::FETCH_ASSOC)) {
 					echo "<tr class='item'>
 					<td class='tdFolio'>".$rowDevs["code"]."</td><input type='hidden' name='tranCode[]' value='".$rowDevs["code"]."'>
 					<td class='tdDate'>".$rowDevs["created_at"]."</td>
